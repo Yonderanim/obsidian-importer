@@ -7,6 +7,7 @@ import {
 	ANAttributeRun,
 	ANBaseline,
 	ANColor,
+	ANEmphasisColor,
 	ANConverter,
 	ANDocument,
 	ANFontWeight,
@@ -104,7 +105,7 @@ export class NoteConverter extends ANConverter {
 			else if (attr.attachmentInfo) {
 				converted += await this.formatAttachment(attr, parentNotePath);
 			}
-			else if (attr.superscript || attr.underlined || attr.color || attr.font || this.multiRun == ANMultiRun.Alignment) {
+			else if (attr.superscript || attr.underlined || attr.color || attr.emphasisColor || attr.font || this.multiRun == ANMultiRun.Alignment) {
 				converted += await this.formatHtmlAttr(attr);
 			}
 			else {
@@ -200,6 +201,7 @@ export class NoteConverter extends ANConverter {
 
 		if (attr.font?.pointSize) style += `font-size:${attr.font.pointSize}pt;`;
 		if (attr.color) style += `color:${this.convertColor(attr.color)};`;
+		if (attr.emphasisColor) style += `background-color:${this.convertEmphasisColor(attr.emphasisColor)};`;
 
 		if (attr.link && !NOTE_URI.test(attr.link)) {
 			if (style) style = ` style="${style}"`;
@@ -404,6 +406,23 @@ export class NoteConverter extends ANConverter {
 		}
 
 		return hexcode;
+	}
+
+	convertEmphasisColor(color: ANEmphasisColor): string {
+		switch (color) {
+			case ANEmphasisColor.Purple:
+				return '#dfccff';
+			case ANEmphasisColor.Pink:
+				return '#ffd6ea';
+			case ANEmphasisColor.Orange:
+				return '#ffe1bf';
+			case ANEmphasisColor.Mint:
+				return '#d9f5e8';
+			case ANEmphasisColor.Blue:
+				return '#d7e6ff';
+			default:
+				return '#fff3a3';
+		}
 	}
 
 	convertAlign(alignment: ANAlignment): string {
