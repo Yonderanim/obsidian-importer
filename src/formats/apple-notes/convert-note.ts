@@ -411,17 +411,17 @@ export class NoteConverter extends ANConverter {
 	convertEmphasisColor(color: ANEmphasisColor): string {
 		switch (color) {
 			case ANEmphasisColor.Purple:
-				return '#dfccff';
+				return '#a357d750';
 			case ANEmphasisColor.Pink:
-				return '#ffd6ea';
+				return '#ea455a50';
 			case ANEmphasisColor.Orange:
-				return '#ffe1bf';
+				return '#f09a3850';
 			case ANEmphasisColor.Mint:
-				return '#d9f5e8';
+				return '#59c4bd50';
 			case ANEmphasisColor.Blue:
-				return '#d7e6ff';
+				return '#3c7df550';
 			default:
-				return '#fff3a3';
+				return '#f0d63850';
 		}
 	}
 
